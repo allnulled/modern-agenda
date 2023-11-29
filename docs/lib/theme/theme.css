@@ -1,0 +1,148 @@
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+    font-family: GreatVibes;
+    src: url("../fonts/Great_Vibes/GreatVibes-Regular.ttf");
+}
+@font-face {
+    font-family: Pacifico;
+    src: url("../fonts/Pacifico/Pacifico-Regular.ttf");
+}
+
+*, button, input {
+    font-family: Roboto;
+    font-family: GreatVibes;
+    font-family: Pacifico !important;
+}
+
+h5 {
+    font-family: Roboto !important;
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 12px;
+    font-size: 19px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+.win7 .cuadro_de_dia_1 {
+    border: 1px solid #666;
+    min-height: 150px;
+}
+
+.win7 .cuadro_de_dia_2 {
+    border: 1px solid #666;
+    min-height: 90px;
+}
+
+.win7 .cuadro_de_dia_4 {
+    max-height: 80px;
+    overflow: scroll;
+    padding: 8px;
+}
+
+.win7 .cuadro_de_dia_1.activo,
+.win7 .cuadro_de_dia_2.activo {
+    background-color: #DDD;
+}
+
+
+.win7 .cuadro_de_dia_1.activo .titulo_de_dia_de_semana,
+.win7 .cuadro_de_dia_2.activo .titulo_de_dia_de_semana {
+    background-color: #DDD;
+    color: black;
+    font-weight: bold;
+    border-bottom: 1px solid #666;
+}
+.campo_de_texto_de_dia {
+    display: none;
+}
+.win7 .cuadro_de_dia_1.activo .campo_de_texto_de_dia,
+.win7 .cuadro_de_dia_2.activo .campo_de_texto_de_dia {
+    display: block;
+}
+
+.win7 .titulo_de_dia_de_semana {
+    padding: 8px;
+    margin: 0px;
+    text-align: center;
+    text-decoration: underline;
+    background-color: #666;
+    color: white;
+    cursor: pointer;
+    font-size: 19px !important;
+}
+
+.win7 .tareas_de_dia {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+}
+
+.win7 .chivato_de_fecha {
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+
+.Solo_en_proyectores,
+.Solo_en_pcs,
+.Solo_en_tablets,
+.Solo_en_moviles,
+.Solo_en_relojes {
+    display: none;
+}
+
+@media all and (min-width: 1200px) {
+    .Solo_en_proyectores {
+        display: block;
+    }
+}
+@media all and (min-width: 992px) and (max-width: 1200px) {
+    .Solo_en_pcs {
+        display: block;
+    }
+}
+@media all and (min-width: 768px) and (max-width: 992px) {
+    .Solo_en_tablets {
+        display: block;
+    }
+}
+@media all and (min-width: 576px) and (max-width: 768px) {
+    .Solo_en_moviles {
+        display: block;
+    }
+}
+@media all and (min-width: 0px) and (max-width: 576px) {
+    .Solo_en_relojes {
+        display: block;
+    }
+}
+
+
+
+
+
+.width_100 {
+    width: 100%;
+}
+.width_50 {
+    width: 50%;
+}
+
+.text_align_left {
+    text-align: left;
+}
+.text_align_center {
+    text-align: center;
+}

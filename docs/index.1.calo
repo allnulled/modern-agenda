@@ -1,0 +1,515 @@
+Ejecutable como documento HTML5
+    con autor allnulled
+    con nombre index
+    con versión 1
+<head>
+    <title>🌐 Classic agenda</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="lib/win7/win7.scoped.2.css" />
+    <link rel="stylesheet" type="text/css" href="lib/simple-grid/simple-grid.css" />
+    <link rel="stylesheet" type="text/css" href="lib/theme/theme.css" />
+    <script src="lib/calo/calo.js"></script>
+</head>
+<body><div id="app"></div></body>.
+
+asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
+  <div class="PaginaDeInicio Component">
+    <h5 style="text-align: center;">Classic agenda</h5>
+    <div class="chivato_de_fecha" v-if="fecha_seleccionada && dia_de_semana_activo">
+      {{ obtener_nombre_de_dia(fecha_seleccionada.getDay())}}, {{ fecha_seleccionada.getDate() }} de {{ obtener_nombre_de_mes(fecha_seleccionada.getMonth()) }} de {{ fecha_seleccionada.getFullYear() }}
+    </div>
+    <table>
+      <tr>
+        <td>
+          <button v-on:click="mover_a_semana_anterior"> « </button>
+        </td>
+        <td class="width_100">
+        </td>
+        <td>
+          <button v-on:click="mover_a_semana_siguiente"> » </button>
+        </td>
+      </tr>
+    </table>
+    <div class="Solo_en_moviles Solo_en_tablets Solo_en_pcs Solo_en_proyectores">
+      <table class="width_100">
+        <tr>
+          <td class="width_50">
+            <div class="cuadro_de_dia_1" :class="{activo: dia_de_semana_activo === 'Lunes'}">
+              <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Lunes')">Lunes</div>
+              <div class="cuadro_de_dia_3">
+                <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_lunes" v-on:keypress.enter="() => introducir_tarea('lunes')" />
+              </div>
+              <div class="cuadro_de_dia_4">
+                <ul class="tareas_de_dia">
+                  <li v-for="tarea, tarea_index in tareas_de_dia_lunes" v-bind:key="'tarea-de-lunes-' + tarea_index">
+                    <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                    <span>{{ tarea.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td class="width_50">
+            <div class="cuadro_de_dia_1" :class="{activo: dia_de_semana_activo === 'Jueves'}">
+              <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Jueves')">Jueves</div>
+              <div class="cuadro_de_dia_3">
+                <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_jueves" v-on:keypress.enter="() => introducir_tarea('jueves')" />
+              </div>
+              <div class="cuadro_de_dia_4">
+                <ul class="tareas_de_dia">
+                  <li v-for="tarea, tarea_index in tareas_de_dia_jueves" v-bind:key="'tarea-de-jueves-' + tarea_index">
+                    <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                    <span>{{ tarea.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="width_50">
+            <div class="cuadro_de_dia_1" :class="{activo: dia_de_semana_activo === 'Martes'}">
+              <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Martes')">Martes</div>
+              <div class="cuadro_de_dia_3">
+                <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_martes" v-on:keypress.enter="() => introducir_tarea('martes')" />
+              </div>
+              <div class="cuadro_de_dia_4">
+                <ul class="tareas_de_dia">
+                  <li v-for="tarea, tarea_index in tareas_de_dia_martes" v-bind:key="'tarea-de-martes-' + tarea_index">
+                    <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                    <span>{{ tarea.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td class="width_50">
+            <div class="cuadro_de_dia_1" :class="{activo: dia_de_semana_activo === 'Viernes'}">
+              <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Viernes')">Viernes</div>
+              <div class="cuadro_de_dia_3">
+                <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_viernes" v-on:keypress.enter="() => introducir_tarea('viernes')" />
+              </div>
+              <div class="cuadro_de_dia_4">
+                <ul class="tareas_de_dia">
+                  <li v-for="tarea, tarea_index in tareas_de_dia_viernes" v-bind:key="'tarea-de-viernes-' + tarea_index">
+                    <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                    <span>{{ tarea.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="width_50">
+            <div class="cuadro_de_dia_1" :class="{activo: dia_de_semana_activo === 'Miércoles'}">
+              <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Miércoles')">Miércoles</div>
+              <div class="cuadro_de_dia_3">
+                <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_miercoles" v-on:keypress.enter="() => introducir_tarea('miercoles')" />
+              </div>
+              <div class="cuadro_de_dia_4">
+                <ul class="tareas_de_dia">
+                  <li v-for="tarea, tarea_index in tareas_de_dia_miercoles" v-bind:key="'tarea-de-miercoles-' + tarea_index">
+                    <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                    <span>{{ tarea.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td class="width_50">
+            <table class="width_100">
+              <tr>
+                <td class="width_50">
+                  <div class="cuadro_de_dia_1 fin_de_semana" :class="{activo: dia_de_semana_activo === 'Sábado'}">
+                    <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Sábado')">Sábado</div>
+                    <div class="cuadro_de_dia_3">
+                      <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_sabado" v-on:keypress.enter="() => introducir_tarea('sabado')" />
+                    </div>
+                    <div class="cuadro_de_dia_4">
+                      <ul class="tareas_de_dia">
+                        <li v-for="tarea, tarea_index in tareas_de_dia_sabado" v-bind:key="'tarea-de-sabado-' + tarea_index">
+                          <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                          <span>{{ tarea.name }}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+                <td class="width_50">
+                  <div class="cuadro_de_dia_1 fin_de_semana" :class="{activo: dia_de_semana_activo === 'Domingo'}">
+                    <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Domingo')">Domingo</div><div class="cuadro_de_dia_3">
+                      <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_domingo" v-on:keypress.enter="() => introducir_tarea('domingo')" />
+                    </div>
+                    <div class="cuadro_de_dia_4">
+                      <ul class="tareas_de_dia">
+                        <li v-for="tarea, tarea_index in tareas_de_dia_domingo" v-bind:key="'tarea-de-domingo-' + tarea_index">
+                          <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+                          <span>{{ tarea.name }}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="Solo_en_relojes">
+      <div class="cuadro_de_dia_2" :class="{activo: dia_de_semana_activo === 'Lunes'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Lunes')">Lunes</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_lunes" v-on:keypress.enter="() => introducir_tarea('lunes')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_lunes" v-bind:key="'tarea-de-lunes-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2" :class="{activo: dia_de_semana_activo === 'Martes'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Martes')">Martes</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_martes" v-on:keypress.enter="() => introducir_tarea('martes')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_martes" v-bind:key="'tarea-de-martes-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2" :class="{activo: dia_de_semana_activo === 'Miércoles'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Miércoles')">Miércoles</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_miercoles" v-on:keypress.enter="() => introducir_tarea('miercoles')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_miercoles" v-bind:key="'tarea-de-miercoles-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2" :class="{activo: dia_de_semana_activo === 'Jueves'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Jueves')">Jueves</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_jueves" v-on:keypress.enter="() => introducir_tarea('jueves')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_jueves" v-bind:key="'tarea-de-jueves-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2" :class="{activo: dia_de_semana_activo === 'Viernes'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Viernes')">Viernes</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_viernes" v-on:keypress.enter="() => introducir_tarea('viernes')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_viernes" v-bind:key="'tarea-de-viernes-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2 fin_de_semana" :class="{activo: dia_de_semana_activo === 'Sábado'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Sábado')">Sábado</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_sabado" v-on:keypress.enter="() => introducir_tarea('sabado')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_sabado" v-bind:key="'tarea-de-sabado-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cuadro_de_dia_2 fin_de_semana" :class="{activo: dia_de_semana_activo === 'Domingo'}">
+        <div class="titulo_de_dia_de_semana" v-on:click="() => cambiar_dia_de_semana('Domingo')">Domingo</div>
+        <div class="cuadro_de_dia_3">
+          <input class="campo_de_texto_de_dia width_100" type="text" placeholder="" v-model="tarea_de_dia_domingo" v-on:keypress.enter="() => introducir_tarea('domingo')" />
+        </div>
+        <div class="cuadro_de_dia_4">
+          <ul class="tareas_de_dia">
+            <li v-for="tarea, tarea_index in tareas_de_dia_domingo" v-bind:key="'tarea-de-domingo-' + tarea_index">
+              <button style="min-width: auto;" v-on:click="() => eliminar_tarea(tarea.id)">✖</button>
+              <span>{{ tarea.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <table>
+      <tr>
+        <td>
+          <button v-on:click="mover_a_semana_anterior"> « </button>
+        </td>
+        <td class="width_100">
+        </td>
+        <td>
+          <button v-on:click="mover_a_semana_siguiente"> » </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      debugo "PaginaDeInicio.data".
+      retorno {
+        fecha_seleccionada: undefined,
+        dia_de_semana_activo: "",
+        tarea_de_dia_lunes: "",
+        tarea_de_dia_martes: "",
+        tarea_de_dia_miercoles: "",
+        tarea_de_dia_jueves: "",
+        tarea_de_dia_viernes: "",
+        tarea_de_dia_sabado: "",
+        tarea_de_dia_domingo: "",
+        tareas_de_dia_lunes: [],
+        tareas_de_dia_martes: [],
+        tareas_de_dia_miercoles: [],
+        tareas_de_dia_jueves: [],
+        tareas_de_dia_viernes: [],
+        tareas_de_dia_sabado: [],
+        tareas_de_dia_domingo: [],
+        otro: 0
+      }.
+    }.
+    propiedad methods como {
+      método gestionar_error con (error) donde {
+        debugo "PaginaDeInicio.gestionar_error".
+        imprimo error.
+        lanzo error.
+      }.
+      método asíncrono mover_a_semana_anterior donde {
+        debugo "PaginaDeInicio.mover_a_semana_anterior".
+        hago this.fecha_seleccionada.setDate(this.fecha_seleccionada.getDate() - 7).
+        hago asíncronamente this.cargar_tareas_de_semana().
+      }.
+      método asíncrono mover_a_semana_siguiente donde {
+        debugo "PaginaDeInicio.mover_a_semana_siguiente".
+        hago this.fecha_seleccionada.setDate(this.fecha_seleccionada.getDate() + 7).
+        hago asíncronamente this.cargar_tareas_de_semana().
+      }.
+      método obtener_nombre_de_dia con (dia) donde {
+        debugo "PaginaDeInicio.obtener_nombre_de_dia".
+        si dia es igual que 0 retorno "Domingo".
+        si dia es igual que 1 retorno "Lunes".
+        si dia es igual que 2 retorno "Martes".
+        si dia es igual que 3 retorno "Miércoles".
+        si dia es igual que 4 retorno "Jueves".
+        si dia es igual que 5 retorno "Viernes".
+        si dia es igual que 6 retorno "Sábado".
+      }.
+      método obtener_nombre_de_mes con (mes) donde {
+        debugo "PaginaDeInicio.obtener_nombre_de_mes".
+        si mes es igual que 0 retorno "Enero".
+        si mes es igual que 1 retorno "Febrero".
+        si mes es igual que 2 retorno "Marzo".
+        si mes es igual que 3 retorno "Abril".
+        si mes es igual que 4 retorno "Mayo".
+        si mes es igual que 5 retorno "Junio".
+        si mes es igual que 6 retorno "Julio".
+        si mes es igual que 7 retorno "Agosto".
+        si mes es igual que 8 retorno "Septiembre".
+        si mes es igual que 9 retorno "Octubre".
+        si mes es igual que 10 retorno "Noviembre".
+        si mes es igual que 11 retorno "Diciembre".
+      }.
+      método asíncrono eliminar_tarea con (id_tarea) donde {
+        debugo "PaginaDeInicio.eliminar_tarea".
+        hago asíncronamente this.$db.delete("Task", id_tarea).
+        hago asíncronamente this.cargar_tareas_de_semana().
+        hago this.$forceUpdate(true).
+      }.
+      método asíncrono introducir_tarea con (dia) donde {
+        debugo "PaginaDeInicio.introducir_tarea".
+        creo campo como "tarea_de_dia_" + dia.
+        creo tarea como this[campo].
+        hago asíncronamente this.$db.insert("Task", {
+          name: tarea,
+          moment: this.fecha_seleccionada
+        }).
+        asigno this[campo] como "".
+        hago this.cargar_tareas_de_semana().
+        hago this.$forceUpdate(true).
+      } en errores hago this.gestionar_error(error).
+      método cambiar_dia_de_semana con (dia_de_semana) donde {
+        debugo "PaginaDeInicio.cambiar_dia_de_semana".
+        si this.dia_de_semana_activo es igual que dia_de_semana {
+          asigno this.dia_de_semana_activo como "".
+          hago this.$forceUpdate(true).
+          retorno.
+        }.
+        asigno this.dia_de_semana_activo como dia_de_semana.
+        creo variable dias_de_diferencia como undefined.
+        creo variable dia_origen como this.fecha_seleccionada.getDay().
+        si dia_origen es igual que 0 asigno dia_origen como 7.
+        creo dia_destino como un hecho donde {
+          si dia_de_semana es igual que "Lunes" retorno 1.
+          si dia_de_semana es igual que "Martes" retorno 2.
+          si dia_de_semana es igual que "Miércoles" retorno 3.
+          si dia_de_semana es igual que "Jueves" retorno 4.
+          si dia_de_semana es igual que "Viernes" retorno 5.
+          si dia_de_semana es igual que "Sábado" retorno 6.
+          si dia_de_semana es igual que "Domingo" retorno 7.
+        }.
+        creo variable dias_diferenciales como 0.
+        si dia_destino es mayor que dia_origen {
+          asigno dias_diferenciales como dia_destino - dia_origen.
+        }.
+        si dia_destino es menor que dia_origen {
+          asigno dias_diferenciales como dia_destino - dia_origen.
+        }.
+        hago this.fecha_seleccionada.setDate(this.fecha_seleccionada.getDate() + dias_diferenciales).
+        hago this.$forceUpdate(true).
+      } en errores hago this.gestionar_error(error).
+      método limpiar_tareas_de_semana donde {
+        asigno this.tareas_de_dia_lunes como [].
+        asigno this.tareas_de_dia_martes como [].
+        asigno this.tareas_de_dia_miercoles como [].
+        asigno this.tareas_de_dia_jueves como [].
+        asigno this.tareas_de_dia_viernes como [].
+        asigno this.tareas_de_dia_sabado como [].
+        asigno this.tareas_de_dia_domingo como [].
+      }.
+      método asíncrono cargar_tareas_de_semana donde {
+        debugo "PaginaDeInicio.cargar_tareas_de_semana".
+        creo inicio_de_semana como un nuevo Date(this.fecha_seleccionada).
+        creo final_de_semana como un nuevo Date(this.fecha_seleccionada).
+        creo variable dia_de_semana_seleccionado como this.fecha_seleccionada.getDay().
+        si dia_de_semana_seleccionado es igual que 0 asigno dia_de_semana_seleccionado como 7.
+        creo dias_a_sumar_para_inicio como 0 - dia_de_semana_seleccionado + 1.
+        creo dias_a_sumar_para_final como 7 - dia_de_semana_seleccionado + 1.
+        hago inicio_de_semana.setDate(inicio_de_semana.getDate() + dias_a_sumar_para_inicio).
+        hago inicio_de_semana.setHours(0).
+        hago inicio_de_semana.setMinutes(0).
+        hago inicio_de_semana.setSeconds(0).
+        hago inicio_de_semana.setMilliseconds(0).
+        hago final_de_semana.setDate(final_de_semana.getDate() + dias_a_sumar_para_final + 0).
+        hago final_de_semana.setHours(0).
+        hago final_de_semana.setMinutes(0).
+        hago final_de_semana.setSeconds(0).
+        hago final_de_semana.setMilliseconds(0).
+        creo tareas_de_semana como asíncronamente this.$db.select("Task").filter(una lambda con (item) donde {
+          imprimo inicio_de_semana.
+          imprimo item.moment.
+          imprimo final_de_semana.
+          imprimo ".................".
+          retorno (item.moment es mayor que inicio_de_semana) y (item.moment es menor que final_de_semana).
+        }).
+        hago this.limpiar_tareas_de_semana().
+        desde 0 hasta tareas_de_semana.length {
+          creo tarea_de_semana como tareas_de_semana[index].
+          creo dia_de_tarea como tarea_de_semana.moment.getDay().
+          si dia_de_tarea es igual que 0 apendizo tarea_de_semana en this.tareas_de_dia_domingo.
+          si dia_de_tarea es igual que 1 apendizo tarea_de_semana en this.tareas_de_dia_lunes.
+          si dia_de_tarea es igual que 2 apendizo tarea_de_semana en this.tareas_de_dia_martes.
+          si dia_de_tarea es igual que 3 apendizo tarea_de_semana en this.tareas_de_dia_miercoles.
+          si dia_de_tarea es igual que 4 apendizo tarea_de_semana en this.tareas_de_dia_jueves.
+          si dia_de_tarea es igual que 5 apendizo tarea_de_semana en this.tareas_de_dia_viernes.
+          si dia_de_tarea es igual que 6 apendizo tarea_de_semana en this.tareas_de_dia_sabado.
+        }.
+        hago this.$forceUpdate(true).
+      } en errores hago this.gestionar_error(error).
+    }.
+    propiedad watch como {
+      método fecha_seleccionada con (nuevo_valor) donde {
+        debugo "PaginaDeInicio.watch.fecha_seleccionada".
+        creo dia_de_semana como nuevo_valor.getDay().
+        si dia_de_semana es igual que 0 asigno this.dia_de_semana_activo como "Domingo".
+        si dia_de_semana es igual que 1 asigno this.dia_de_semana_activo como "Lunes".
+        si dia_de_semana es igual que 2 asigno this.dia_de_semana_activo como "Martes".
+        si dia_de_semana es igual que 3 asigno this.dia_de_semana_activo como "Miércoles".
+        si dia_de_semana es igual que 4 asigno this.dia_de_semana_activo como "Jueves".
+        si dia_de_semana es igual que 5 asigno this.dia_de_semana_activo como "Viernes".
+        si dia_de_semana es igual que 6 asigno this.dia_de_semana_activo como "Sábado".
+        hago this.cargar_tareas_de_semana().
+      }.
+    }.
+    propiedad computed como {}.
+    método beforeCreate donde {}.
+    método created donde {}.
+    método beforeMount donde {}.
+    método mounted donde {
+      debugo "PaginaDeInicio.mounted".
+      asigno this.fecha_seleccionada como un nuevo Date().
+    }.
+    método beforeUpdate donde {}.
+    método updated donde {}.
+    método beforeUnmount donde {}.
+    método unmounted donde {}.
+    método activated donde {}.
+    método deactivated donde {}.
+  }.
+}.
+
+creo main como una función asíncrona donde {
+  ignoro que hago asíncronamente RanasDB.dropDatabaseIfExists("Classic_agenda_db").
+  asigno Vue.prototype.$db como asíncronamente RanasDB.connect("Classic_agenda_db", [[{
+    Task: "++id,name,moment"
+  }, una función]], {
+    debug: console.log
+  }).
+  asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
+    propiedad path como "/".
+    propiedad name como "PaginaDeInicio".
+    propiedad component como PaginaDeInicio.
+    propiedad props como {}.
+  }] con traducciones {
+      propiedad es como {}.
+      propiedad en como {}.
+      propiedad ca como {}.
+  } con plantilla {
+    <div class="App Component Castelog-app win7">
+      <router-view :root="this"></router-view>
+    </div>
+  } con estilos {
+      html {}
+      body {}
+      .Component {}
+      .App {}
+  } con lógica {
+    retorno {
+      método data donde {
+        debugo "App.data".
+        retorno {}.
+      }.
+      propiedad methods como {}.
+      propiedad watch como {}.
+      método asíncrono beforeMount donde {
+        debugo "App.beforeMount".
+        asigno this.$window como window.
+      }.
+      método mounted donde {}.
+    }.
+  } montada en "#app".
+} en errores imprimo error.
+
+hago main().
