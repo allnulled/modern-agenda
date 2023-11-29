@@ -1,3 +1,15 @@
+/**
+
+tono_7: #CCCCFF
+tono_6: #AAAAFF
+tono_5: #8888FF
+tono_4: #6666FF
+tono_3: #4444FF
+tono_2: #2222FF
+tono_1: #0000FF
+
+*/
+
 @font-face {
     font-family: Roboto;
     src: url("../fonts/Roboto/Roboto-Regular.ttf");
@@ -12,14 +24,14 @@
 }
 
 *, button, input {
-    font-family: Roboto;
     font-family: GreatVibes;
-    font-family: Pacifico !important;
+    font-family: Pacifico;
+    font-family: Roboto !important;
 }
 
 h5 {
     font-family: Roboto !important;
-    background-color: #333;
+    background-color: #222266;
     color: white;
     margin: 0;
     padding: 12px;
@@ -32,48 +44,62 @@ table {
 
 
 .win7 .cuadro_de_dia_1 {
-    border: 1px solid #666;
+    border: 1px solid #4444FF;
     min-height: 150px;
 }
 
 .win7 .cuadro_de_dia_2 {
-    border: 1px solid #666;
-    min-height: 90px;
+    border-bottom: 1px solid #FFFFFF;
+    background-color: #CCCCFF;
 }
 
 .win7 .cuadro_de_dia_4 {
-    max-height: 80px;
-    overflow: scroll;
-    padding: 8px;
+    padding: 4px;
 }
 
 .win7 .cuadro_de_dia_1.activo,
-.win7 .cuadro_de_dia_2.activo {
-    background-color: #DDD;
+.win7 .cuadro_de_dia_2.activo .titulo_de_dia_de_semana {
+    
 }
 
 
 .win7 .cuadro_de_dia_1.activo .titulo_de_dia_de_semana,
 .win7 .cuadro_de_dia_2.activo .titulo_de_dia_de_semana {
-    background-color: #DDD;
+    background-color: #5555FF;
     color: black;
     font-weight: bold;
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid #5555FF;
+}
+.win7 .cuadro_de_dia_2 .cuadro_de_dia_3 {
+    padding: 4px;
+}
+.win7 .cuadro_de_dia_2 .cuadro_de_dia_3,
+.win7 .cuadro_de_dia_2 .cuadro_de_dia_4 {
+    display: none;
+}
+.win7 .cuadro_de_dia_2.activo .cuadro_de_dia_3,
+.win7 .cuadro_de_dia_2.activo .cuadro_de_dia_4 {
+    display: block;
 }
 .campo_de_texto_de_dia {
-    display: none;
+    visibility: hidden;
 }
 .win7 .cuadro_de_dia_1.activo .campo_de_texto_de_dia,
 .win7 .cuadro_de_dia_2.activo .campo_de_texto_de_dia {
-    display: block;
+    visibility: visible;
+}
+
+.win7 .cuadro_de_dia_2.activo {
+    padding-bottom: 26px;
 }
 
 .win7 .titulo_de_dia_de_semana {
-    padding: 8px;
+    position: relative;
+    padding: 0px;
     margin: 0px;
     text-align: center;
     text-decoration: underline;
-    background-color: #666;
+    background-color: #4444FF;
     color: white;
     cursor: pointer;
     font-size: 19px !important;
@@ -92,7 +118,18 @@ table {
     text-decoration: underline;
 }
 
-
+.win7 .chivato_de_tareas {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    background-color: #CCCCFF;
+    color: black;
+    font-weight: bold;
+    padding: 2px;
+    border-radius: 3pt;
+}
 
 
 .Solo_en_proyectores,
